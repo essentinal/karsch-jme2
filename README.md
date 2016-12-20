@@ -2,7 +2,7 @@
 
 Karsch the Pig is a small game created by Stephan Dreyer and David Walter for the course Multimedia Production at the http://fh-brandenburg.de'>University of Applied Sciences Brandenburg.
 
-http://karsch.googlecode.com/files/karsch1.jpg' />
+![](https://rawgit.com/essentinal/karsch-jme2/tree/master/site/karsch1.jpg)
 
 The game features the adventures of a smart pig named Karsch, living on a small farm. He is a family pig, ready to do everything that is necessary for his family. Mrs. Karsch is his wife and in this classical role she tells him what to do, otherwise she'll be mad at him. The Karschs have several babies, but no one really knows, how much. Gunther is a longtime friend of Karsch, but not the smartest bunny. He often makes mistakes.
 
