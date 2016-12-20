@@ -1,0 +1,4 @@
+start_txt=Find your way through the labyrinth, maybe you find other things, too...
+levelstyle=forest
+entrance=right
+exit=left

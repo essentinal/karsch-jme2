@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" 
+      codebase="http://www.rolla-nappelz.de/karsch/"
+      href="karsch.jnlp">
+  <information>
+    <title>Karsch The Pig</title>
+    <vendor>David Walter and Stephan Dreyer</vendor>
+    <homepage href="index.html"/>
+    <description>Karsch The Pig Episode One: The Lost Babies</description>
+    <description kind="short">Karsch 1</description>
+    <description kind="tooltip">Karsch The Pig</description>
+    <icon href="img/karsch.png" width="64" height="64"/>
+    <offline-allowed/>
+  </information>
+
+  <security>
+      <all-permissions/>
+  </security>
+
+  <resources>
+    <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se" java-vm-args="-Xms128m -Xmx512m -XX:PermSize=128m"/>
+    <jar href="Karsch.jar" main="true"/>
+    <jar href="lib/fengui_lwjgl2.0.jar"/>
+    <jar href="lib/jme-audio.jar"/>
+    <jar href="lib/jme-awt.jar"/>
+    <jar href="lib/jme-collada.jar"/>
+    <jar href="lib/jme-editors.jar"/>
+    <jar href="lib/jme-effects.jar"/>
+    <jar href="lib/jme-font.jar"/>
+    <jar href="lib/jme-gamestates.jar"/>
+    <jar href="lib/jme-model.jar"/>
+    <jar href="lib/jme-scene.jar"/>
+    <jar href="lib/jme-swt.jar"/>
+    <jar href="lib/jme-terrain.jar"/>
+    <jar href="lib/jme-xml.jar"/>
+    <jar href="lib/jme.jar"/>
+    <jar href="lib/gluegen-rt.jar"/>
+    <jar href="lib/jogl.jar"/>
+    <jar href="lib/jorbis-0.0.17.jar"/>
+    <jar href="lib/junit-4.1.jar"/>
+    <jar href="lib/jinput.jar"/>
+    <jar href="lib/lwjgl.jar"/>
+    <jar href="lib/lwjgl_util.jar"/>
+    <jar href="lib/lwjgl_util_applet.jar"/>
+    <jar href="lib/jmejtree_jme2.jar"/>
+    <jar href="lib/propertytable.jar"/>
+    <jar href="lib/scenemonitor_jme2.jar"/>
+    <jar href="lib/sm_properties_jme2.jar"/>
+    <jar href="lib/sm_textdescriptor_jme2.jar"/>
+    <jar href="lib/swt.jar"/>
+    <jar href="lib/swt_fake.jar"/>
+  </resources>
+
+  <resources os="Windows">
+    <j2se version="1.5+"/>
+    <nativelib href="lib/windows-native.jar"/>
+  </resources>
+  <resources os="Mac OS">
+    <j2se version="1.5+"/>
+    <nativelib href="lib/macos-native.jar"/>
+  </resources>
+  <resources os="Linux" arch="i386">
+    <j2se version="1.5+"/>
+    <nativelib href="lib/linux-native.jar"/>
+  </resources>
+
+  <application-desc main-class="karsch.KarschSimpleGame">
+	<argument>--nofork</argument> 
+</application-desc>
+</jnlp>

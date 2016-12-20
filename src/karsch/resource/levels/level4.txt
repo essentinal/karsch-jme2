@@ -1,0 +1,10 @@
+start_txt=Find the exit, use the levers to open the gates
+levelstyle=farm
+
+9,10=rotation(left)
+18,8=18,9
+28,21=29,21
+19,22=19,21
+
+entrance=right
+exit=left

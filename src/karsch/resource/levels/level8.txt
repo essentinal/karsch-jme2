@@ -1,0 +1,6 @@
+start_txt=Press F1 if you need help
+levelstyle=farm
+
+13,23=rotation(down)
+entrance=down
+exit=left

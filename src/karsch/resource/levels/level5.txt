@@ -1,0 +1,4 @@
+start_txt=Go through the underground passage, Karsch don't like it so much...
+levelstyle=underground
+entrance=right
+exit=down

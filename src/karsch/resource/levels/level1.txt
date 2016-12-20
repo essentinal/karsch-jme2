@@ -1,0 +1,4 @@
+start_txt=Press F1 if you need help
+levelstyle=house
+entrance=down
+exit=up

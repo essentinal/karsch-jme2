@@ -1,0 +1,4 @@
+start_txt=Rescue the little pig, but beware of the crazy cows!
+levelstyle=farm
+entrance=up
+exit=down

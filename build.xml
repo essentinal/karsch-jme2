@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     19.12.2008 17:30:34                                                        
+
+	 Karsch the pig
+         
+     
+     The file tree should look like this:
+     
+		Karsch.bat
+   		Karsch.jar 	(ohne libs)
+   		properties.cfg
+   
+		lib/
+      		fengui_lwjgl2.0.jar
+        	gluegen-rt.jar
+        	jinput-dx8.dll
+	        jinput-raw.dll
+    	    jinput.jar
+        	jme-audio.jar
+        	jme-awt.jar
+        	jme-collada.jar
+        	jme-editors.jar
+        	jme-effects.jar
+        	jme-font.jar
+        	jme-gamestates.jar
+        	jme-model.jar
+        	jme-scene.jar
+        	jme-swt.jar
+        	jme-terrain.jar
+        	jme-xml.jar
+        	jme.jar
+        	jmejtree_jme2.jar
+        	jogl.jar
+        	jorbis-0.0.17.jar
+        	junit-4.1.jar
+        	lwjgl.dll
+        	lwjgl.jar
+        	lwjgl_util.jar
+        	lwjgl_util_applet.jar
+        	odejava.dll
+        	OpenAL32.dll
+        	propertytable.jar
+        	scenemonitor_jme2.jar
+        	sm_properties_jme2.jar
+	        sm_textdescriptor_jme2.jar
+    	    swt.jar
+        	swt_fake.jar
+     
+     Stephan Dreyer
+     ====================================================================== -->
+<project name="Karsch the pig" default="build">
+	<property name="version" value="1.0" />
+
+	<description>
+            Ant file for building and running Karsch classes and jar
+    </description>
+
+	<mkdir dir="build" />
+	<mkdir dir="build/bin" />
+
+	<path id="build.classpath">
+		<fileset dir="${basedir}" includes=". lib/*.jar lib/**/*.jar">
+
+		</fileset>
+	</path>
+
+	<pathconvert property="manifest.classpath" pathsep=" ">
+		<path refid="build.classpath" />
+		<mapper>
+			<chainedmapper>
+				<flattenmapper />
+				<globmapper from="*" to="lib/*" />
+			</chainedmapper>
+		</mapper>
+	</pathconvert>
+
+	<manifestclasspath property="lib.list" jarfile="build/RDCClient.jar">
+		<classpath refid="build.classpath" />
+	</manifestclasspath>
+
+
+	<!-- ================================= 
+          target: build              
+         ================================= -->
+	<target name="build" description="build class files">
+		<mkdir dir="build" />
+		<mkdir dir="build/bin" />
+		<javac source="1.5" target="1.5" srcdir="src" destdir="build/bin" classpathref="build.classpath" debug="on" verbose="on" />
+		<copy todir="build/bin/karsch/resource">
+			<fileset dir="src/karsch/resource" />
+		</copy>
+
+		<mkdir dir="build/lib" />
+		<copy todir="build/lib" filtering="off">
+			<!--flattenmapper /-->
+			<fileset dir="lib" includes="**/*.jar" />
+		</copy>
+
+	</target>
+
+	<!-- ================================= 
+          target: run              
+         ================================= -->
+	<target name="run" depends="build" description="run the generated class files">
+		<java classpathref="build.classpath" classpath="${java.class.path};build/bin" classname="karsch.KarschSimpleGame" fork="true">
+			<jvmarg line="-Djava.library.path=lib -Xms128m -Xmx512m" />
+		</java>
+	</target>
+
+	<!-- ================================= 
+          target: buildjar              
+         ================================= -->
+	<target name="buildjar" depends="build" description="build jar file">
+		<delete file="build/RDCClient.jar" failonerror="off" />
+		<delete file="MANIFEST.MF" failonerror="off" />
+		<tstamp>
+			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+
+		<!--delete dir="build/lib" includeemptydirs="true"/-->
+
+		<manifest file="MANIFEST.MF">
+			<attribute name="Main-Class" value="karsch.KarschSimpleGame" />
+			<attribute name="Built-By" value="Stephan" />
+			<section name="Karsch">
+				<attribute name="Built-Date" value="${TODAY}" />
+				<attribute name="Version" value="${version}" />
+				<attribute name="Implementation-Title" value="Karsch the Pig - Episode One: The Lost Babies" />
+				<attribute name="Implementation-Version" value="${version} ${TODAY}" />
+				<attribute name="Implementation-Vendor" value="Walter &amp; Dreyer" />
+			</section>
+			<attribute name="Class-Path" value="Libs.jar Karsch.jar" />
+			<!--<attribute name="Class-Path" value="${manifest.classpath} Karsch.jar" />-->
+
+		</manifest>
+
+		<zip destfile="build/bin/Libs.jar" duplicate="preserve">
+			<zipgroupfileset dir="build/lib" includes="**/*.jar" />
+		</zip>
+
+		<jar destfile="build/bin/Karsch.jar" basedir="build/bin" excludes="*.jar **/*.jar" manifest="MANIFEST.MF" />
+	</target>
+
+	<target name="buildnatives" description="build natives jar file">
+		<delete dir="build/bin/native" failonerror="false"/>
+		<delete file="build/bin/Windows-natives.jar" failonerror="false"/>
+		<mkdir dir="build/bin/native" />
+		<copy flatten="true" todir="build/bin/native">
+			<fileset dir="build/bin/native" includes="**/*.dll"/>
+		</copy>
+
+		<jar destfile="build/bin/Windows-natives.jar" basedir="lib" includes="**/*.dll" />
+
+	</target>
+
+	<!-- ================================= 
+          target: runjar              
+         ================================= -->
+	<target name="runjar" description="run the generated jar file">
+		<java jar="build/bin/Karsch.jar" fork="true" classpathref="build.classpath">
+			<jvmarg value="-Xms128m" />
+			<jvmarg value="-Xmx512m" />
+			<jvmarg value="-XX:PermSize=128m" />
+			<jvmarg value="-Djava.library.path=build/bin/Libs.jar" />
+			<arg value="--nofork" />
+		</java>
+	</target>
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="cleans the build directory">
+		<delete failonerror="off" includeemptydirs="true">
+			<fileset dir="build" includes="**/*" />
+			<fileset file="MANIFEST.MF" />
+		</delete>
+	</target>
+</project>

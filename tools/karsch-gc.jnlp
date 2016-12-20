@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp codebase="http://karsch.googlecode.com/files" 
+href="karsch-gc.jnlp" 
+spec="1.0+">
+  <information>
+    <title>Karsch The Pig</title>
+    <vendor>David Walter and Stephan Dreyer</vendor>
+    <homepage href=""/>
+    <description>Karsch The Pig Episode One: The Lost Babies</description>
+    <description kind="short">Karsch 1</description>
+    <description kind="tooltip">Karsch The Pig</description>
+    <icon href="img/karsch.png" width="64" height="64"/>
+    <offline-allowed/>
+  </information>
+
+  <security>
+      <all-permissions/>
+  </security>
+  
+  <update check="always"/>
+
+  <resources>
+    <j2se version="1.5+" href="http://java.sun.com/products/autodl/j2se" java-vm-args="-Xms128m -Xmx512m -XX:PermSize=128m"/>
+    <jar href="Karsch-1.0-bin.jar" main="true"/>
+    <jar href="Libs.jar"/>
+  </resources>
+
+  <resources os="Windows">
+    <j2se version="1.5+"/>
+    <nativelib href="Windows-natives.jar"/>
+  </resources>
+  <resources os="Mac OS">
+    <j2se version="1.5+"/>
+    <nativelib href="lib/macos-native.jar"/>
+  </resources>
+  <resources os="Linux" arch="i386">
+    <j2se version="1.5+"/>
+    <nativelib href="lib/linux-native.jar"/>
+  </resources>
+
+  <application-desc main-class="karsch.KarschSimpleGame">
+	<argument>--nofork</argument> 
+</application-desc>
+</jnlp>
